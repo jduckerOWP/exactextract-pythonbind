@@ -26,6 +26,7 @@ find_package(GEOS REQUIRED)
 #Configure some options the various components this module can build
 option(BUILD_CLI "Build the exactextract cli binary" ON) #requires gdal, cli11
 option(BUILD_TEST "Build the exactextract tests" ON) #requires catch
+option(BUILD_PYTHON "Build the exactextract Python bindings" ON) # requires pybind11
 option(BUILD_DOC "Build documentation" ON) #requires doxygen
 
 if(BUILD_CLI)
@@ -159,6 +160,22 @@ if(BUILD_TEST)
     )
 
 endif() #BUILD_TEST
+
+if (BUILD_PYTHON)
+    # Build the Python bindings, which require pybind11
+    find_package(pybind11 CONFIG)
+    if (pybind11_FOUND)
+        # TODO: which pybind11 version
+    endif() #pybind11_FOUND
+    if (NOT pybind11_FOUND)
+        message(FATAL_ERROR
+        "pybind11 was not found. It is still possible to build and test libexactextract, but the "
+        "exactextract Python bindings cannot be built or installed.")
+    endif() #NOT pybind11_FOUND
+
+    pybind11_add_module(_exactextract src/pybindings/exactextract.cpp)
+
+endif() # BUILD_PYTHON
 
 message(STATUS "Source version: " ${EXACTEXTRACT_VERSION_SOURCE})
 configure_file(src/version.h.in ${CMAKE_CURRENT_BINARY_DIR}/generated/version.h)
