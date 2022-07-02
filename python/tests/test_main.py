@@ -3,6 +3,8 @@
 
 import pytest
 
+import exactextract
+
 
 class TestMain():
 

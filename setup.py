@@ -66,6 +66,10 @@ class CMakeBuild(build_ext):
         subprocess.check_call(cmake_cmd,
                               cwd=self.build_temp)
 
+        make_cmd = ['make']
+        subprocess.check_call(make_cmd,
+                              cwd=self.build_temp)
+
         # Move from build temp to final position
         for ext in self.extensions:
             self.move_output(ext)
