@@ -18,9 +18,6 @@ namespace exactextract
 {
     PYBIND11_MODULE(_exactextract, m)
     {
-        m.doc() = "test docs!";
-
-        // Now bind all class methods
         bind_box(m);
         bind_cell(m);
         bind_coordinate(m);
