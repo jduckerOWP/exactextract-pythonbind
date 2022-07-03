@@ -249,14 +249,30 @@ if (BUILD_PYTHON)
         src/raster_sequential_processor.h)
 
     set(PYBIND_SOURCES
-        src/pybindings/cell.cpp
-        src/pybindings/box.cpp
-        src/pybindings/gdal_dataset_wrapper.cpp
-        src/pybindings/grid.cpp
-        src/pybindings/coordinate.cpp
-        src/pybindings/exactextract.cpp
-        src/pybindings/side.cpp
-        ${WRAPPER_SOURCES})
+        ${WRAPPER_SOURCES}
+        src/pybindings/bindings.cpp
+        src/pybindings/box_bindings.cpp
+        src/pybindings/box_bindings.h
+        src/pybindings/cell_bindings.cpp
+        src/pybindings/cell_bindings.h
+        src/pybindings/coordinate_bindings.cpp
+        src/pybindings/coordinate_bindings.h
+        src/pybindings/gdal_dataset_wrapper_bindings.cpp
+        src/pybindings/gdal_dataset_wrapper_bindings.h
+        src/pybindings/gdal_raster_wrapper_bindings.cpp
+        src/pybindings/gdal_raster_wrapper_bindings.h
+        src/pybindings/grid_bindings.cpp
+        src/pybindings/grid_bindings.h
+        src/pybindings/operation_bindings.cpp
+        src/pybindings/operation_bindings.h
+        src/pybindings/processor_bindings.cpp
+        src/pybindings/processor_bindings.h
+        src/pybindings/side_bindings.cpp
+        src/pybindings/side_bindings.h
+        src/pybindings/utils_bindings.cpp
+        src/pybindings/utils_bindings.h
+        src/pybindings/writer_bindings.cpp
+        src/pybindings/writer_bindings.h)
 
     pybind11_add_module(_exactextract MODULE ${PYBIND_SOURCES})
     target_include_directories(_exactextract PRIVATE

@@ -1,15 +1,15 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
 
+#include "grid_bindings.h"
 #include "grid.h"
 
 namespace py = pybind11;
 
 namespace exactextract
 {
-
     template <typename extent_tag>
-    void bind_grid(py::module m, const char *class_name)
+    void bind_grid_template(py::module m, const char *class_name)
     {
         py::class_<Grid<extent_tag>>(m, class_name)
             .def(py::init<Box, double, double>())
@@ -36,11 +36,10 @@ namespace exactextract
             .def(py::self == py::self)
             .def(py::self != py::self);
     }
-
-    void init_grid(py::module &m)
+    void bind_grid(py::module &m)
     {
-        bind_grid<infinite_extent>(m, "Grid__infinite_extent");
-        bind_grid<bounded_extent>(m, "Grid__bounded_extent");
+        bind_grid_template<infinite_extent>(m, "Grid__infinite_extent");
+        bind_grid_template<bounded_extent>(m, "Grid__bounded_extent");
     }
 
 }

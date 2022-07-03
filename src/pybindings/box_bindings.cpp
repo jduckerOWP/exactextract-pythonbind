@@ -1,14 +1,14 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
 
+#include "box_bindings.h"
 #include "box.h"
 
 namespace py = pybind11;
 
 namespace exactextract
 {
-
-    void init_box(py::module &m)
+    void bind_box(py::module &m)
     {
         py::class_<Box>(m, "Box")
             .def(py::init<double, double, double, double>())
@@ -44,5 +44,4 @@ namespace exactextract
             .def("strictly_contains", &Box::strictly_contains, py::arg("c"))
             .def(py::self == py::self);
     }
-
 }

@@ -1,14 +1,14 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
 
+#include "coordinate_bindings.h"
 #include "coordinate.h"
 
 namespace py = pybind11;
 
 namespace exactextract
 {
-
-    void init_coordinate(py::module &m)
+    void bind_coordinate(py::module &m)
     {
         py::class_<Coordinate>(m, "Coordinate")
             .def(py::init<>())
@@ -19,5 +19,4 @@ namespace exactextract
             .def(py::self == py::self)
             .def(py::self != py::self);
     }
-
 }

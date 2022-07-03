@@ -1,14 +1,13 @@
 #include <pybind11/pybind11.h>
-#include <pybind11/operators.h>
 
+#include "cell_bindings.h"
 #include "cell.h"
 
 namespace py = pybind11;
 
 namespace exactextract
 {
-
-    void init_cell(py::module &m)
+    void bind_cell(py::module &m)
     {
         py::class_<Cell>(m, "Cell")
             .def(py::init<double, double, double, double>())
@@ -22,5 +21,4 @@ namespace exactextract
             .def("box", &Cell::box)
             .def("take", &Cell::take, py::arg("c"), py::arg("prev_original") = nullptr);
     }
-
 }

@@ -1,14 +1,13 @@
 #include <pybind11/pybind11.h>
-#include <pybind11/operators.h>
 
+#include "side_bindings.h"
 #include "side.h"
 
 namespace py = pybind11;
 
 namespace exactextract
 {
-
-    void init_side(py::module &m)
+    void bind_side(py::module &m)
     {
         py::enum_<Side>(m, "Side")
             .value("NONE", Side::NONE)
@@ -18,5 +17,4 @@ namespace exactextract
             .value("BOTTOM", Side::BOTTOM)
             .export_values();
     }
-
 }
