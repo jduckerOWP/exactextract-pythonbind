@@ -1,4 +1,8 @@
+#include <map>
+#include <list>
+
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
 #include "processor.h"
 #include "gdal_dataset_wrapper.h"
@@ -11,6 +15,48 @@ namespace py = pybind11;
 
 namespace exactextract
 {
+    MapWriter::MapWriter() {}
+
+    MapWriter::~MapWriter() {}
+
+    void MapWriter::add_operation(const Operation &op)
+    {
+        m_ops.push_back(&op);
+    }
+
+    void MapWriter::set_registry(const StatsRegistry *reg)
+    {
+        m_reg = reg;
+    }
+
+    void MapWriter::write(const std::string &fid)
+    {
+        m_dict[fid] = std::list<double>();
+        for (const auto &op : m_ops)
+        {
+            if (m_reg->contains(fid, *op))
+            {
+                const auto &stats = m_reg->stats(fid, *op);
+                auto fetcher = op->result_fetcher();
+
+                auto val = fetcher(stats);
+                if (val.has_value())
+                {
+                    m_dict[fid].push_back(val.value());
+                }
+                else
+                {
+                    m_dict[fid].push_back(std::numeric_limits<double>::quiet_NaN());
+                }
+            }
+        }
+    }
+
+    std::map<const std::string, std::list<double>> MapWriter::get_map()
+    {
+        return m_dict;
+    }
+
     void bind_writer(py::module &m)
     {
         py::class_<OutputWriter>(m, "OutputWriter")
@@ -24,5 +70,9 @@ namespace exactextract
             .def_static("get_driver_name", &GDALWriter::get_driver_name, py::arg("filename"))
             .def("add_id_field", &GDALWriter::add_id_field, py::arg("field_name"), py::arg("field_type"))
             .def("copy_id_field", &GDALWriter::copy_id_field, py::arg("w"));
+
+        py::class_<MapWriter, OutputWriter>(m, "MapWriter")
+            .def(py::init<>())
+            .def("get_map", &MapWriter::get_map);
     }
 }
