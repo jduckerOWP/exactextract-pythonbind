@@ -18,9 +18,13 @@ namespace exactextract
 
         void add_operation(const Operation &op) override;
 
+        void reset_operation();
+
         void set_registry(const StatsRegistry *reg) override;
 
         void write(const std::string &fid) override;
+
+        void clear();
 
         std::map<const std::string, std::list<double>> get_map();
 

@@ -5,4 +5,4 @@ from .dataset import GDALDatasetWrapper
 from .operation import Operation
 from .raster import GDALRasterWrapper
 from .writer import MapWriter, GDALWriter
-from .processor import FeatureSequentialProcessor
+from .processor import FeatureSequentialProcessor, RasterSequentialProcessor

@@ -42,7 +42,6 @@ class TestGDALRasterWrapper():
     def test_descriptor(self):
         assert parse_raster_descriptor('temp:NETCDF:outputs.nc:tmp2m') == (
             'temp', 'NETCDF:outputs.nc:tmp2m', 1)
-        print(parse_raster_descriptor('temp:NETCDF:outputs.nc:tmp2m'))
         assert parse_raster_descriptor('temp2:temperature.tif[4]') == (
             'temp2', 'temperature.tif', 4)
 

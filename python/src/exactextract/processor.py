@@ -3,7 +3,10 @@
 
 from typing import List, Union
 
-from _exactextract import FeatureSequentialProcessor as _FeatureSequentialProcessor, RasterSequentialProcessor as _RasterSequentialProcessor
+from _exactextract import (FeatureSequentialProcessor as
+                           _FeatureSequentialProcessor,
+                           RasterSequentialProcessor as
+                           _RasterSequentialProcessor)
 
 from .dataset import GDALDatasetWrapper
 from .operation import Operation

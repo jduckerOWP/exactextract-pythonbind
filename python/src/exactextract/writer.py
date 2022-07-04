@@ -53,7 +53,8 @@ class GDALWriter(_GDALWriter):
             path = pathlib.Path(filename_or_ds)
 
         # Assert the parent directory and resolve the full path
-        if not path.parent.is_dir():
+        if not path.parent.is_dir() and not path.parent.name.startswith(
+                'vsimem'):
             raise RuntimeError('Parent directory path not found: %s' %
                                str(path.parent))
         path = path.resolve()

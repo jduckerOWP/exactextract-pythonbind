@@ -24,6 +24,11 @@ namespace exactextract
         m_ops.push_back(&op);
     }
 
+    void MapWriter::reset_operation()
+    {
+        m_ops.clear();
+    }
+
     void MapWriter::set_registry(const StatsRegistry *reg)
     {
         m_reg = reg;
@@ -31,7 +36,10 @@ namespace exactextract
 
     void MapWriter::write(const std::string &fid)
     {
-        m_dict[fid] = std::list<double>();
+        if (!m_dict.count(fid))
+        {
+            m_dict[fid] = std::list<double>();
+        }
         for (const auto &op : m_ops)
         {
             if (m_reg->contains(fid, *op))
@@ -50,6 +58,11 @@ namespace exactextract
                 }
             }
         }
+    }
+
+    void MapWriter::clear()
+    {
+        m_dict.clear();
     }
 
     std::map<const std::string, std::list<double>> MapWriter::get_map()
@@ -73,6 +86,8 @@ namespace exactextract
 
         py::class_<MapWriter, OutputWriter>(m, "MapWriter")
             .def(py::init<>())
+            .def("reset_operation", &MapWriter::reset_operation)
+            .def("clear", &MapWriter::clear)
             .def("get_map", &MapWriter::get_map);
     }
 }
