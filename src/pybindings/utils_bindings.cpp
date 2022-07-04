@@ -18,6 +18,6 @@ namespace exactextract
             .def_static("from_descriptor", &parse_stat_descriptor, py::arg("descriptor"));
 
         m.def("parse_dataset_descriptor", &parse_dataset_descriptor);
-        m.def("parse_raster_descriptor", &parse_dataset_descriptor);
+        m.def("parse_raster_descriptor", &parse_raster_descriptor);
     }
 }

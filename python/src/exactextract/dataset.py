@@ -98,11 +98,10 @@ class GDALDatasetWrapper(_GDALDatasetWrapper):
         super().__init__(this_ds_name, this_layer_name, this_field_name)
 
     @classmethod
-    def from_dataset_descriptor(
-            cls,
-            desc: str,
-            field_name: Optional[str] = None,
-            field_idx: Optional[int] = None) -> GDALDatasetWrapper:
+    def from_descriptor(cls,
+                        desc: str,
+                        field_name: Optional[str] = None,
+                        field_idx: Optional[int] = None) -> GDALDatasetWrapper:
         """
         Create GDALDatasetWrapper object from exactextract dataset descriptor (like what the CLI takes)
 

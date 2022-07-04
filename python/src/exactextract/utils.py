@@ -17,7 +17,7 @@ def get_ds_path(ds: Union[gdal.Dataset, ogr.DataSource]):
         str: File path to dataset
     """
     if isinstance(ds, gdal.Dataset):
-        return ds.GetFileList[0]     # type: ignore
+        return ds.GetFileList()[0]     # type: ignore
     else:
         return ds.GetName()
 
