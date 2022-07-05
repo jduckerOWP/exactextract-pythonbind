@@ -87,8 +87,8 @@ class CMakeBuild(build_ext):
 # logic and declaration, and simpler if you include description/version in a file.
 setup(
     name="exactextract",
-    version="0.0.1",
-    author="",
+    version="1.0.0",
+    author="ISciences, LLC",
     author_email="",
     description="A test project using pybind11 and CMake",
     long_description="",
@@ -99,4 +99,5 @@ setup(
     zip_safe=False,
     extras_require={},
     python_requires=">=3.7",
+    install_requires=["gdal>=2.0.0"]
 )

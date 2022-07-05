@@ -106,7 +106,7 @@ class GDALDatasetWrapper(_GDALDatasetWrapper):
         Create GDALDatasetWrapper object from exactextract dataset descriptor (like what the CLI takes)
 
         Args:
-            desc (str): exactextract stat descriptor (example: 'temp:NETCDF:outputs.nc:tmp2m', 'temp:temperature.tif[4]')
+            desc (str): exactextract stat descriptor (example: 'test.gpkg[layer_name]')
             field_name (Optional[str], optional): Optional ID field name. Defaults to None.
             field_idx (Optional[int], optional): Optional ID field index. Defaults to None.
 
